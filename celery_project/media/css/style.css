@@ -1,0 +1,57 @@
+body{
+	background-color:#eee;
+	font-family: 'trebuchet ms',helvetica,sans-serif; 
+	font-size: 16px;
+	color: #777;
+    margin:50px;
+}
+
+h1, h2, h3{
+   	color: #AA2808;
+}
+
+.form table{
+}
+.form th{
+    text-align:left;    
+    width:150px;
+}
+.form ul li{
+    list-style:none;
+    float:left;
+    margin:0px;
+    padding-left:0px;
+    font-size:x-small;
+    color:red;
+    
+}
+
+.form td{
+    min-width:150px;
+}
+
+.form input{
+    min-width:80px;
+}
+
+.form .btn{
+    width:auto;
+}
+
+a{
+    text-decoration:none;
+}
+.flash{
+    color:green;
+}
+
+footer{
+    position:absolute;
+    bottom:5%;
+    width:90%;
+    text-align:center;
+}
+
+footer p{
+    font-size: 14px;
+}

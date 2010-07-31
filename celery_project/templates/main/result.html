@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content_heading %}Submission Result{% endblock %}
+{% block content %}
+File Link: <a href = "/media/{{ submission.submission }}">Your File</a><br />
+{% if submission.result %}
+    Content:<br />
+<pre>
+{{ submission.submission.read }}    
+</pre>
+{% else %}
+    <br />
+    File not processed yet.
+    Refresh this page to see your status again.
+{% endif %}
+<br /><br /><br />
+<a href = "/">Back Home</a>
+{% endblock %}
+{% block footer %}
+{% endblock %}
