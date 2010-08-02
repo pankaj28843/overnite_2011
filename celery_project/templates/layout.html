@@ -7,12 +7,14 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
 </head>
 <body>
+	<header></header>
     <article>
         <h2>{% block content_heading %}{% endblock %}</h2>
         {% block content %}{% endblock %}
     </article>
+    <aside></aside>
     <footer>
-        {% block footer %}{% endblock %}
-    </footer>   
+        {% block footer %}<a href = "/admin" target = "_blank" >Admin</a> | <a href = "#" target = "_blank">Sitemap</a>{% endblock %}
+    </footer>     
 </body>
 </html>

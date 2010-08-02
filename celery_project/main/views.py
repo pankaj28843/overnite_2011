@@ -8,10 +8,9 @@ def home(request):
         form = SubmissionForm(request.POST, request.FILES) 
         if form.is_valid():            
             new_submission = form.save()
-            tasks.submit.apply_async(args=[new_submission])
-            return render_to_response('main/success.html', {
-                'sub_id': new_submission.id,
-            })
+            new_submission.celery_task = tasks.submit.apply_async(args=[new_submission.name,new_submission.program,new_submission.input_file,new_submission.output_file])
+            new_submission.save()
+            return HttpResponseRedirect('/'+str(new_submission.id))
     else:
         form = SubmissionForm()
     return render_to_response('main/home.html', {

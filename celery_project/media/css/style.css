@@ -1,54 +1,53 @@
 body{
 	background-color:#eee;
 	font-family: 'trebuchet ms',helvetica,sans-serif; 
-	font-size: 16px;
+	font-size: 15px;
 	color: #777;
     margin:50px;
+    min-height:500px;
+    position:relative;
 }
-
-h1, h2, h3{
+table{
+	cellspacing:20px;
+}
+th{
+	text-align:left;
+	font-size : large;
+	padding-left:15px;
+}
+td{
+	vertical-align: top;
+}	
+td .small{
+	font-size:x-small;
+	margin-left:10px;
+}
+h1{
    	color: #AA2808;
+   	text-align:left;
+   	margin-left:300px;
 }
 
-.form table{
+h2 span{
+	font-size:small;
 }
-.form th{
-    text-align:left;    
-    width:150px;
+.side-links{
+	float:right;
+	margin-right:250px;	
 }
-.form ul li{
-    list-style:none;
-    float:left;
-    margin:0px;
-    padding-left:0px;
-    font-size:x-small;
-    color:red;
-    
-}
-
-.form td{
-    min-width:150px;
-}
-
-.form input{
-    min-width:80px;
-}
-
-.form .btn{
-    width:auto;
-}
-
 a{
     text-decoration:none;
 }
 .flash{
     color:green;
 }
-
+.page{
+    min-height:500px;
+}
 footer{
-    position:absolute;
-    bottom:5%;
-    width:90%;
+	position:absolute;
+	bottom:-50px;
+	width:100%;
     text-align:center;
 }
 
