@@ -38,6 +38,17 @@ h2 span{
 a{
     text-decoration:none;
 }
+.form ul, li{
+    list-style:none;    
+}
+.form .errorlist{
+    font-size:10px;
+    color:red;
+    text-align:left;
+    line-height:10px;
+    margin:0px;
+    padding:0px;
+}
 .flash{
     color:green;
 }
@@ -47,8 +58,10 @@ a{
 footer{
 	position:absolute;
 	bottom:-50px;
-	width:100%;
+	left:10%;
+    width:80%;
     text-align:center;
+    
 }
 
 footer p{

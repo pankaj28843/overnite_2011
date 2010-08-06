@@ -1,16 +1,19 @@
 from main.models import *
 from django.contrib import admin
+
+class InputOutPutInline(admin.TabularInline):
+	model = InputOutput
+	extra = 1
+class ProblemAdmin(admin.ModelAdmin):
+    inlines = [InputOutPutInline]
+    list_display = ('title','id')
+    search_fields = ['title', 'question']
     
 class SubmissionAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None,               {'fields': ['name']}),
-        (None,               {'fields': ['program']}),
-        (None,               {'fields': ['input_file']}),
-        (None,               {'fields': ['output_file']}),
-    ]
-    list_display = ('name','program','id')
+    list_display = ('problem','program','status','result','id')
     list_filter = ['time']
-    search_fields = ['name']
+    search_fields = ['problem']
     date_hierarchy = 'time'
     
 admin.site.register(Submission,SubmissionAdmin)
+admin.site.register(Problem,ProblemAdmin)

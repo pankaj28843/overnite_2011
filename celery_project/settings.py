@@ -53,7 +53,7 @@ MEDIA_ROOT = os.path.join(ROOT_PATH, 'media')
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media'
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'main',
 )
 
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576
 BROKER_HOST = "localhost"
 BROKER_PORT = 5672
 BROKER_USER = "rohan"

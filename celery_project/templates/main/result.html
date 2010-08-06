@@ -1,17 +1,13 @@
 {% extends 'layout.html' %}
 {% block content_heading %}Submission Result{% endblock %}
 {% block content %}
-File Link: <a href = "/media/{{ submission.program }}">Your File</a><br />
-
+<a href = "/media/{{ submission.program }}">Your Program</a><br/><br/>
 {% if submission.celery_task.ready %}
-The File has been processed<br />
-    Content:<br />
-<pre>
-{{ submission.celery_task.result }}    
-</pre>
+<span style = "color:green;">The File has been processed.</span><br/>
+    Result:<br/>
+    {{ submission.result }}
 {% else %}
-    <br />
-    File not processed yet.<br />
+    <span style = "color:red;">File not processed yet.</span><br/>
     Refresh this page to see your status again.
 {% endif %}
 <br /><br /><br />
