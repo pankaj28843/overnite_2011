@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content_heading %}Submission{% endblock %}
+{% block content %}
+<form action="" method="post" class = "form" enctype="multipart/form-data">
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" value="Submit" class = ".btn"/>
+</form>        
+<br />
+This site is using the celery module. <br />The task you give will be processed in some other place (worker) i.e. not in this server or your computer.
+<br/>If your submission is not being processed try starting a worker (<a href = "/media/celeryd_conf.zip">Download It</a>).
+<br/><br/><br/><br/>You may login to the admin site through user "manager", pass "manager".
+{% endblock %}
