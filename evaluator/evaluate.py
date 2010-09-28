@@ -4,12 +4,9 @@ import os
 import re
 import timechecker
 
-result=dict() #stores the result
-testresult=list()
-exectime=list()
 response=dict()
 
-def checkOutput(givenpath,samplepath):
+def checkOutput(givenpath,samplepath,testresult):
 
   #opening a given file and a sample file
   givenfile=open(givenpath,'r')
@@ -154,7 +151,7 @@ def checkcodeJava(sourcepath):
   javafile=open(sourcepath,'r')
 
   # opening a temporary file for writing
-  tempfile=open('temp.java','w')
+  tempfile=open('files/temp/temp.java','w')
 
   #writing all required headers at the top
   tempfile.write("import java.lang.*;\n")
@@ -177,7 +174,7 @@ def checkcodeJava(sourcepath):
   tempfile.close()
 
 
-def evaluateC(sourcepath,testlist,timelimit):
+def evaluateC(sourcepath,testlist,timelimit,result):
 
   if(not(os.path.exists('files/temp'))):
         os.system('mkdir files/temp')
@@ -191,7 +188,8 @@ def evaluateC(sourcepath,testlist,timelimit):
   os.system('chmod 777 files/temp/temp.c') #granting all permissions to the temp
   os.system('gcc -std=c99 -o files/temp/a.out files/temp/temp.c') # compiling the C code
 
-
+  testresult=list()
+  exectime=list()
   #creating output file and comparing with the sample if a.out is generated
   if(os.path.exists('files/temp/a.out')):
 
@@ -200,16 +198,15 @@ def evaluateC(sourcepath,testlist,timelimit):
        outputpath=i['output']
        runcmd='./files/temp/./a.out <' + inputpath + '> files/temp/output.out'
        response=timechecker.execute(runcmd,timelimit)
-       
        # response={'status':'ok/runtime exceeded/runtime error','executiontime':'time/-1'}
        if (response['run_status']=="ok"):
-           checkOutput('files/temp/output.out',outputpath)
+           checkOutput('files/temp/output.out',outputpath,testresult)
            exectime.append(response['runtime'])
        else:
            testresult.append(response['run_status'])
            exectime.append(response['runtime'])
+       
       
-     
      result['status']=testresult
      result['executiontime']=exectime
 
@@ -220,7 +217,7 @@ def evaluateC(sourcepath,testlist,timelimit):
 
 
 
-def evaluateCPP(sourcepath,testlist,timelimit):
+def evaluateCPP(sourcepath,testlist,timelimit,result):
 
   if(not(os.path.exists('files/temp'))):
         os.system('mkdir files/temp')
@@ -236,6 +233,8 @@ def evaluateCPP(sourcepath,testlist,timelimit):
 
 
   #creating output file and comparing with the sample if a.out is generated
+  testresult=list()
+  exectime=list()
   if(os.path.exists('files/temp/a.out')):
 
      for i in testlist:
@@ -246,7 +245,7 @@ def evaluateCPP(sourcepath,testlist,timelimit):
        
        # response={'status':'ok/runtime exceeded/runtime error','executiontime':'time/-1'}
        if (response['run_status']=="ok"):
-           checkOutput('files/temp/output.out',outputpath)
+           checkOutput('files/temp/output.out',outputpath,testresult)
            exectime.append(response['runtime'])
        else:
            testresult.append(response['run_status'])
@@ -261,13 +260,11 @@ def evaluateCPP(sourcepath,testlist,timelimit):
      result['status']='errors'
      result['executiontime']=-1
 
-def evaluateJava(sourcepath,testlist,timelimit):
+def evaluateJava(sourcepath,testlist,timelimit,result):
 
   if(not(os.path.exists('files/temp'))):
         os.system('mkdir files/temp')
   os.system('rm files/temp/*')
-  os.system('rm *.class')
-  os.system('rm *.java')
 
   if(checkcodeJava(sourcepath)=='true'):
         result['status']='Malicious code'
@@ -278,23 +275,23 @@ def evaluateJava(sourcepath,testlist,timelimit):
   filename=source[len(source)-1]
   classname=filename.split(".")[0]
 
-  os.system('chmod 777 temp.java') #granting all permissions to the temp
-  os.system('javac temp.java') # compiling the java code
+  os.system('chmod 777 files/temp/temp.java') #granting all permissions to the temp
+  os.system('javac -d files/temp files/temp/temp.java') # compiling the java code
 
-
+  testresult=list()
+  exectime=list()
   #creating output file and comparing with the sample if a.out is generated
-  if(os.path.exists('./'+classname+'.class')):
+  if(os.path.exists('files/temp/'+classname+'.class')):
 
      for i in testlist:
        inputpath=i['input']
        outputpath=i['output']
-       runcmd='java '+classname+' < ' + inputpath + ' > files/temp/output.out'
-       print runcmd
+       runcmd='java -classpath files/temp '+classname+' < ' + inputpath + ' > files/temp/output.out'
        response=timechecker.execute(runcmd,timelimit)
        
        # response={'status':'ok/runtime exceeded/runtime error','executiontime':'time/-1'}
        if (response['run_status']=="ok"):
-           checkOutput('files/temp/output.out',outputpath)
+           checkOutput('files/temp/output.out',outputpath,testresult)
            exectime.append(response['runtime'])
        else:
            testresult.append(response['run_status'])
@@ -314,16 +311,17 @@ def evaluateJava(sourcepath,testlist,timelimit):
 
 
 def evaluate(language,sourcepath,testlist,timelimit): # testlist is a list of test dictionaries : {'input':'inputpath','output':'outputpath'}
-  if(language=='C'):
-    evaluateC(sourcepath,testlist,timelimit)
-  if(language=='C++'):
-    evaluateCPP(sourcepath,testlist,timelimit)
-  if(language=='Java'):
-    evaluateJava(sourcepath,testlist,timelimit)
+  result=dict()
+  if(language=='c'):
+    evaluateC(sourcepath,testlist,timelimit,result)
+  if(language=='c++'):
+    evaluateCPP(sourcepath,testlist,timelimit,result)
+  if(language=='java'):
+    evaluateJava(sourcepath,testlist,timelimit,result)
   return result;
 
 
 if __name__=='__main__':
-  test=[{'input':'input/sort.in','output':'output/sort.out'},{'input':'input/sort2.in','output':'output/sort2.out'}]
-  res=evaluate('Java','javacodes/sort.java',test,1)
-  print result
+  test=[{'input':'input/sort.in','output':'output/sort.out'}]
+  res=evaluate('java','javacodes/sort.java',test,1)
+  print res

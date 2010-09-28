@@ -1,4 +1,8 @@
+#!/usr/bin/python
+
 import os, signal, time, sys
+
+# to test this code, just enter a valid command in run below and a time u require in seconds
 
 def execute(command,t0):
     
@@ -8,11 +12,15 @@ def execute(command,t0):
     #Child
     child_pid = os.fork()
     if child_pid == 0:
+	#print "child started"
 	res = os.system(command)
 	os.write(w, str(res))
+	#print "bla bla"
+	sys.exit()
     
     #Parent
     else:
+	#print "parent started"
         has_stopped = False
         has_Failed = False
         runtime_error = 0
@@ -34,10 +42,10 @@ def execute(command,t0):
 
 	  if((time.time() - start) >= t0): #checking if time exceeded t0
    	        #print "Time Exceeded"
-    		new_command = "ps -ef | grep " + '"' + command + '"' + "| awk '{print $2}' > pid.txt"
+    		new_command = "ps -ef | grep " + '"' + command + '"' + "| awk '{print $2}' > files/temp/pid.txt"
     		#print new_command
    		a = os.system(new_command)
-    		f = open('pid.txt' , 'r')
+    		f = open('files/temp/pid.txt' , 'r')
    		for line in f:
       			#print line
        			line = line.split('\n')[0]
@@ -73,6 +81,7 @@ def execute(command,t0):
         #print
         return dic
 
-# to test this code, just enter a valid command in run below and a time u require in seconds
 if __name__ == "__main__":
     print execute("python abc.py", 1)
+    print "here"
+
