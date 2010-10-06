@@ -1,0 +1,13 @@
+OVERNITE EVALUATOR
+
+This is an evaluator for Overnite 2011, which is a Algorithm Competition held by IIT Kharagpur's annual Technological Fest Kshitij! As it is evident this version of software shall be used by Kshitij 2011.
+
+This contains 3 major components:
+
+1. Evaluator which does the actual evaluation of code files.
+2. Broker which distributes load on various evaluators.
+3. Web Interface, which provides a rich interface for competitors and participators.
+
+Authors:
+
+sanket, email: sanket@sanketagarwal.com
