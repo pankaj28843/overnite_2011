@@ -1,0 +1,4 @@
+Run "./manage.py celeryd -l info" 
+in the directory where you extracted the config zip file.
+You must have django, python-mysqldb, django-celery and celery installed. 
+Please close the worker after checking this so that others can also try running there own workers.

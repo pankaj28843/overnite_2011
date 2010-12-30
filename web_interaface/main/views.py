@@ -58,6 +58,13 @@ def problem_input(request, problem_id, testcase_id):
         return HttpResponse(testcase.input_file.read(),mimetype="text/in")
     else:
         raise Http404
+
+def problem_output(request, problem_id, testcase_id):
+    testcase = get_object_or_404(TestCase, pk=testcase_id)
+    if testcase.is_public:
+        return HttpResponse(testcase.output_file.read(),mimetype="text/out")
+    else:
+        raise Http404
     
 def test():
     import django

@@ -7,7 +7,7 @@ class TestCaseInline(admin.TabularInline):
 class ProblemAdmin(admin.ModelAdmin):
     class Media:
         js = ('js/nicEdit.js','js/admin_wysiwg.js')
-    list_display = ('title','question','no_of_test_cases', 'total_marks')
+    list_display = ('title','no_of_test_cases', 'total_marks')
     inlines = [TestCaseInline]
     search_fields = ['title', 'question']
     
