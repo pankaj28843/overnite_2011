@@ -129,7 +129,7 @@ class Submission(models.Model):
         tests = []
         time_limit = None
         for case in self.problem.testcase_set.all():            
-            time_limit = min(timelimit, case.time_limit) if time_limit else case.time_limit
+            time_limit = max(timelimit, case.time_limit) if time_limit else case.time_limit
             tests.append({'input':case.input_file.read(), 'output':case.output_file.read(), 'time_limit':case.time_limit, 'marks': case.marks})
         return [self.problem, self.language, self.program.read(),self.filename,tests, time_limit]
 
