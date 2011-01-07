@@ -1,9 +1,0 @@
-# these are comment lines
-# list of malicious code fragments for C
-# leave out hashed comments and empty lines
-
-popen
-pipe
-fork
-system
-kill
