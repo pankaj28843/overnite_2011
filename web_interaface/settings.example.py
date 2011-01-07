@@ -5,6 +5,7 @@ ROOT_PATH = os.path.dirname(__file__)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+SERVER = "localhost"
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -14,12 +15,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'overnite',                      # Or path to database file if using sqlite3.
-        'USER': 'public',                      # Not used with sqlite3.
-        'PASSWORD': 'rohan',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'database_name',                  
+        'USER': 'user',                     
+        'PASSWORD': 'pass',                  
+        'HOST': SERVER,          
+        'PORT': '3306',                     
     }
 }
 
@@ -104,8 +105,9 @@ INSTALLED_APPS = (
 )
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576
-BROKER_HOST = "localhost"
+
+BROKER_HOST = SERVER
 BROKER_PORT = 5672
-BROKER_USER = "rohan"
-BROKER_PASSWORD = "rohan"
+BROKER_USER = "user"
+BROKER_PASSWORD = "pass"
 BROKER_VHOST = "myvhost"
