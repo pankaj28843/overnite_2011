@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    	<meta name="description" content="Overnite " />
+		<meta name="keywords" content="" />
+		{% block head %}{% endblock %}
+		<title>{% block title %}Overnite | Kshitij 2011{% endblock %}</title>
+		<link rel="stylesheet" href="/media/stylesheets/style.css" type="text/css" media="screen"/>
+        <link rel="shortcut icon" href="/media/favicon.ico" />        
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<div class="logo" >				
+					<h1>Overnite</h1>
+					<h2></h2>
+				</div>         
+   				<div class="extra">
+   					{% if request.user.is_active %}Welcome {{ request.user }}{% else %}<a href="">Log In</a>&nbsp;|&nbsp;<a href="">Register</a>{% endif %} | <a href = "/admin" target = "_blank" >Admin</a>
+   				</div>	
+    			<div style="clear:both;"/>
+			</div>
+			<div id="menu">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/about/">About</a></li>
+						<li><a href="/contest/">Contest</a></li>
+						<li><a href="http://www.ktj.in/" target="_blank">Kshitj</a></li>
+						<li><a href="">Help</a></li>
+                        <li style="float:right; margin-top:-4px; margin-right:-10px;">
+                            <form action="" method='post'>
+		                        <input id="search-term" name="keys" size="20" maxlength="40" type="text">&nbsp;
+		                        <input src="/media/images/button-search-go.gif" id="search-go" class="submit" alt="Go" title="Go" type="image" name='op' value='Search'>
+		                        &nbsp;&nbsp;&nbsp;&nbsp;
+                            </form>
+                        </li>
+					</ul>
+			</div>
+    		<div id="page" style="text-a">
+    			<div id ="content">
+	 				<h1>{% block content_heading %}{% endblock %}</h1>
+					{% block content %}{% endblock %}					
+				</div>
+				{% block sidebar %}
+					{% include 'includes/sidebar.html' %}
+				{% endblock %}
+				<div style="clear:both;"></div>
+			</div>
+			<div id="footer">
+				<p>
+					Copyright 2011. &copy; <a href="http://www.ktj.in" target="_blank">Kshitij 2011</a>. All rights reserved.
+					<br/>Site best viewed in 
+					<a href="http://www.mozilla.com/en-US/firefox/" target="_blank">Mozilla Firefox</a> or <a href="http://www.google.com/chrome" target = "_blank">Google Chrome</a><br/>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

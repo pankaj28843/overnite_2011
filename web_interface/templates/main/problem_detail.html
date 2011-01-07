@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{% load cache %}
+{% block head %}
+{% if last_submission %}
+    {% if not last_submission.ready %}
+	   <meta http-equiv="refresh" content="1;">
+	{% endif %}
+    <link href="/media/stylesheets/shThemeDjango.css" rel="stylesheet" type="text/css" />
+    <link href="/media/stylesheets/shCore.css" rel="stylesheet" type="text/css">
+    <script src="/media/js/shCore.js" type="text/javascript"></script>
+    <script src="/media/js/shAutoloader.js" type="text/javascript"></script>
+    {% if last_submission.language == "c" or  "cpp" %}<script src="/media/js/shBrushCpp.js" type="text/javascript"></script>{% endif %}{% if last_submission.language ==  "java" %}<script src="/media/js/shBrushJava.js" type="text/javascript"></script>{% endif %}{% if last_submission.language == "python" %}<script src="/media/js/shBrushPython.js" type="text/javascript"></script>{% endif %}
+    <!--<script src="/media/js/shBrushPython.js" type="text/javascript"></script>  -->
+    <script type="text/javascript">
+	    function toggleVisibility(e)
+	    {
+		    var program_div = document.getElementById('program');
+		    if (program_div.style.display=="none")
+			    program_div.style.display="block";
+		    else
+			    program_div.style.display="none";
+	    }
+    </script>	
+{% endif %}
+{% endblock %}
+{% block content_heading %}{{ problem.title }}{% endblock %}
+{% block content %}
+<div class="entry">
+	<div class = "problem">{{ problem.question|safe }}</div>
+	{% if public_testcases %}
+	<p><strong>Sample input:</strong>
+	{% for case in public_testcases %}	    
+		<a href ="{{ case.input_url }}">Input</a>
+		<a href ="{{ case.output_url }}">Output</a>&nbsp;&nbsp;&nbsp;
+	{% endfor %}
+	{% endif %}
+	</p>
+	<form action="#" method="post" class = "form" enctype="multipart/form-data">
+	<table>
+	        {{ form }} 
+	</table>
+	<input type="submit" value="Submit" class = ".btn"/>
+	</form>
+	{% if last_submission %}
+		<p>
+		{% if last_submission.celery_task.ready %}
+    		{% if last_submission.correct %}
+    			<span style = "color:green;">Your submission was correct.</span>
+    		{% else %}
+    		    <span style = "color:red;">Your submission was incorrect.</span>    
+    		{% endif %}
+		    <br/>You were awarded {{ last_submission.result.marks }} mark{{ last_submission.result.marks|pluralize }}  for your submission ( {{ last_submission.attempts }} attempt{{ last_submission.attempts|pluralize }} ) .
+		{% else %}
+		    <span style = "color:red;">Your old submission is in process. Please Wait</span> <a href ="">Refresh</a><br/>
+		    Refresh this page to see your status again.
+		{% endif %}
+		</p>
+<pre class="brush: {{ last_submission.language }}; toolbar: false; gutter: true;" id="program" style="">
+{{ last_submission.program.read }}
+</pre>
+    {% endif %}
+</div>
+<script type="text/javascript">
+    SyntaxHighlighter.all();
+    toggleVisibility('program');    
+</script>
+{% endblock %}
+{% block sidebar %}
+{% cache 0 sidebar_problem problem %}
+<div id="sidebar">
+    <center><h1>Problem Stats:</h1></center>
+  	Total Submissions: {{ problem.status.total_submissions }}<br/>
+  	Sucessful Submissions: {{ problem.status.successful_submissions }}<br/>
+  	Sucess Rate: {{ problem.status.success_rate }}%<br/><br/>
+    <table>
+    	<thead>
+    		<tr>
+    			<th>Team</th><th>Lang</th><th>Status</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+  		{% for submission in problem.status.latest_submissions %}
+    		<tr>
+    			<td>{{ submission.user|title }}</td><td>{{ submission.language|title }}</td><td>{{ submission.status }}</td><td>{{ submission.time|timesince }} ago</td>
+    		</tr>
+    	{% endfor %}
+    	</tbody>
+    </table>
+</div>
+{% endcache %}
+{% endblock %}
