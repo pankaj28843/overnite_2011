@@ -40,9 +40,9 @@ class TestCase(models.Model):
     problem = models.ForeignKey(Problem)
     input_file = models.FileField('Input File', upload_to = 'inputs', storage=fs)
     output_file = models.FileField('Output File', upload_to = 'outputs', storage=fs)
-    time_limit = models.FloatField('Time Limit')
+    time_limit = models.FloatField('Time Limit (Seconds)', default = 1)
     is_public = models.BooleanField('Is Public', default = False)
-    marks = models.IntegerField('Marks')
+    marks = models.IntegerField('Marks', default = 10)
     def __unicode__(self):
         return self.problem.title + ': Input/Output'
     def input_url(self):
