@@ -1,0 +1,6 @@
+Requirements:  django, python-mysqldb, django-celery and celery installed. 
+
+Unzip the worker.zip in this directory. 
+Change directory to the unzipped worker and then run "./manage.py celeryd -l info" 
+
+To run multiple workers unzip more workers from the zip and run them separately. 

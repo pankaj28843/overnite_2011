@@ -31,10 +31,12 @@ def submit(name, language,program,filename, tests, time_limit):
             test = tests[i]            
             time_taken = result['executiontime'][i]
             result['marks'] += round(test['marks']*((test['time_limit'] - time_taken)/test['time_limit']))            
-        else:
+        else:            
             result['successful'] = False
         i+=1
-        
+
+    if not result['successful']:
+        result['marks'] = 0
     return result
 
 '''
