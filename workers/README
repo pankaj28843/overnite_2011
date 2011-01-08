@@ -1,6 +1,8 @@
 Requirements:  django, python-mysqldb, django-celery and celery installed. 
 
-Unzip the worker.zip in this directory. 
-Change directory to the unzipped worker and then run "./manage.py celeryd -l info" 
+Run ./exec_worker.sh worker_name to start a worker
 
-To run multiple workers unzip more workers from the zip and run them separately. 
+./exec_worker.sh:
+    Provides an easy way to execute multiple workers from within the same directory.
+    This will automatically create a worker which imports from the base_worker. 
+    
