@@ -10,7 +10,7 @@ if [ ! -z "$worker" ]; then
         mv worker $worker
         cd $worker 
         chmod +x manage.py
-        ./manage.py celeryd -l info $worker -n $worker
+        ./manage.py celeryd -l info $worker -n $worker -E
         cd ..
         rm -r $worker
     fi
