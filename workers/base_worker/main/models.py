@@ -139,7 +139,6 @@ class Submission(models.Model):
 class SubmissionForm(forms.ModelForm):
     def clean_program(self):
         program = self.cleaned_data['program']
-        print program._size > settings.MAX_UPLOAD_SIZE
         if program._size > settings.MAX_UPLOAD_SIZE:
             error = 'Please keep filesize under %s, yours was %s.' %(filesizeformat(settings.MAX_UPLOAD_SIZE),
                                                                      filesizeformat(program._size)
