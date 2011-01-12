@@ -1,3 +1,4 @@
+from django.template.defaultfilters import filesizeformat
 from django.db import models
 from django import forms
 from picklefield import PickledObjectField
@@ -8,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 import settings, os, datetime
 STORAGE_PATH = os.path.join(settings.ROOT_PATH, 'files')
 fs = FileSystemStorage(location=STORAGE_PATH)
+
 #The programming problem
 class Problem(models.Model):
     title = models.CharField('Title', max_length = 100)
@@ -135,6 +137,16 @@ class Submission(models.Model):
 
 #Form for a submission to be made by the user
 class SubmissionForm(forms.ModelForm):
+    def clean_program(self):
+        program = self.cleaned_data['program']
+        print program._size > settings.MAX_UPLOAD_SIZE
+        if program._size > settings.MAX_UPLOAD_SIZE:
+            error = 'Please keep filesize under %s, yours was %s.' %(filesizeformat(settings.MAX_UPLOAD_SIZE),
+                                                                     filesizeformat(program._size)
+                                                                     )
+            raise forms.ValidationError(error)
+        return program
+
     class Meta:
         model = Submission
         fields = ['language','program']
