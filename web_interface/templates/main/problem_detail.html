@@ -35,12 +35,20 @@
 	{% endfor %}
 	{% endif %}
 	</p>
-	<form action="#" method="post" class = "form" enctype="multipart/form-data">
-	<table>
-	        {{ form }} 
-	</table>
-	<input type="submit" value="Submit" class = ".btn"/>
-	</form>
+	{% if not last_submission.correct %}
+        {% if submission_limit_reached %}
+        <p>
+        You have already reached the limit for max submissions for this problem.
+        </p>
+	    {% else %}
+	    <form action="#" method="post" class = "form" enctype="multipart/form-data">
+	    <table>	
+	            {{ form }} 
+	    </table>
+	    <input type="submit" value="Submit" class = ".btn"/>
+	    </form>
+	    {% endif %}
+	{% endif %}
 	{% if last_submission %}
 		<p>
 		{% if last_submission.celery_task.ready %}
@@ -49,11 +57,11 @@
     		{% else %}
     		    <span style = "color:red;">Your submission was incorrect.</span>    
     		{% endif %}
-		    <br/>You were awarded {{ last_submission.result.marks }} mark{{ last_submission.result.marks|pluralize }}  for your submission ( {{ last_submission.attempts }} attempt{{ last_submission.attempts|pluralize }} ) .
+		    <br/>You were awarded {{ last_submission.result.marks }} mark{{ last_submission.result.marks|pluralize }}  for your submission
 		{% else %}
-		    <span style = "color:red;">Your old submission is in process. Please Wait</span> <a href ="">Refresh</a><br/>
-		    Refresh this page to see your status again.
+		    <span style = "color:red;">Your old submission is in process. Please Wait</span> <a href ="">Refresh</a>
 		{% endif %}
+		( {{ last_submission.attempts }} attempt{{ last_submission.attempts|pluralize }}, {{ left_submissions }} submission{{ left_submissions|pluralize }} left)
 		</p>
 <pre class="brush: {{ last_submission.language }}; toolbar: false; gutter: true;" id="program" style="">
 {{ last_submission.program.read }}
@@ -68,6 +76,8 @@
 {% block sidebar %}
 {% cache 0 sidebar_problem problem %}
 <div id="sidebar">
+    <center><h1>Your stats:</h1></center>
+    Total Marks: <b>{{ total_marks }}</b>
     <center><h1>Problem Stats:</h1></center>
   	Total Submissions: {{ problem.status.total_submissions }}<br/>
   	Sucessful Submissions: {{ problem.status.successful_submissions }}<br/>
@@ -85,7 +95,7 @@
     		</tr>
     	{% endfor %}
     	</tbody>
-    </table>
+    </table>    
 </div>
 {% endcache %}
 {% endblock %}

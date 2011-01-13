@@ -3,18 +3,20 @@
 {% block content_heading %}Problems:{% endblock %}
 {% block content %}
 <div class="entry">
-    <ul>
+    <table style="min-width:400px;">
     {% for p in problems %}
-        <li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>
+        <tr><td><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></td><td>{% if p.is_solved %}<span style = "color:green;">(Solved)</span>{% endif %}</td></tr>
     {% empty %}
         No problems are available.
     {% endfor %}
-    </ul> 
+    </table> 
 </div>
 {% endblock %}
 {% block sidebar %}
 {% cache 10 sidebar_contest_index %}
 <div id="sidebar">
+    <center><h1>Your stats:</h1></center>
+    Total Marks: <b>{{ total_marks }}</b>
     <center><h1>Recent Activity</h1></center>
     <table>
     	<thead>
@@ -29,7 +31,7 @@
     		</tr>
     	{% endfor %}
     	</tbody>
-    </table>
+    </table>    
 </div>
 {% endcache %}
 {% endblock %}

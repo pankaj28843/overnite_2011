@@ -23,3 +23,4 @@ BROKER_PORT = 5672
 BROKER_USER = "user"
 BROKER_PASSWORD = "pass"
 BROKER_VHOST = "myvhost"
+

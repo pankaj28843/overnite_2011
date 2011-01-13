@@ -20,6 +20,16 @@ class Problem(models.Model):
         return '/contest/problem/%d/' %(self.id)
     def no_of_test_cases(self):
         return self.testcase_set.count()
+
+    def solved(self, user):
+        solved = False
+        try:            
+            solved = self.submission_set.get(user=user, is_latest=True).correct()
+        except:
+            pass
+        
+        return solved
+    
     def status(self):
         submissions = self.submission_set.filter(is_latest=True)
         latest_submissions = submissions.filter(is_latest=True).order_by('-time')
@@ -37,6 +47,7 @@ class Problem(models.Model):
         for case in self.testcase_set.all():
             marks += case.marks
         return marks
+
 #Input Output file for problem
 class TestCase(models.Model):   
     problem = models.ForeignKey(Problem)
@@ -134,7 +145,7 @@ class Submission(models.Model):
             time_limit = max(time_limit, case.time_limit) if time_limit else case.time_limit
             tests.append({'input':case.input_file.read(), 'output':case.output_file.read(), 'time_limit':case.time_limit, 'marks': case.marks})
         return [self.problem, self.language, self.program.read(),self.filename,tests, time_limit]
-
+    
 #Form for a submission to be made by the user
 class SubmissionForm(forms.ModelForm):
     def clean_program(self):
@@ -151,3 +162,14 @@ class SubmissionForm(forms.ModelForm):
         fields = ['language','program']
         filename = forms.CharField(widget=HiddenInput())
         
+
+def get_total_marks(user):
+    submissions = Submission.objects.filter(user = user)
+    marks = 0    
+    for submission in submissions:        
+        try:
+            marks += submission.result()['marks']
+        except:
+            pass
+
+    return marks

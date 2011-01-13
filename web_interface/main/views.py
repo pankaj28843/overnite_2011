@@ -1,9 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
-from main.models import Problem, SubmissionForm, Submission, TestCase
-from settings import MEDIA_URL
+from main.models import *
+from settings import MEDIA_URL, MAX_SUBMISSIONS
 from django.contrib.auth.models import User
 from django.template import RequestContext
+testuser = User.objects.get_or_create(username = 'test')[0]
 
 def home(request):
     return render_to_response('main/index.html',context_instance=RequestContext(request))
@@ -12,15 +13,23 @@ def about(request):
     return render_to_response('main/about.html',context_instance=RequestContext(request))
 
 def contest_index(request):
+    problem_list = []
+    if not request.user.is_active:
+        request.user = testuser
+    user = request.user
     problems = Problem.objects.all()
+    for problem in problems:
+        problem.is_solved = problem.solved(user)
+        problem_list.append(problem)
+        
     submissions = Submission.objects.filter(is_latest=True).order_by('-time')[:10] 
     return render_to_response('main/contest_index.html', {
-        'problems': problems,
-        'submissions':submissions,
+        'problems': problem_list,
+        'submissions':submissions,        
+        'total_marks': get_total_marks(user),
     },context_instance=RequestContext(request))
 
 def problem_detail(request, problem_id):
-    testuser = get_object_or_404(User, username = 'test')
     if not request.user.is_active:
         request.user = testuser
     problem = get_object_or_404(Problem, pk=problem_id)
@@ -30,7 +39,7 @@ def problem_detail(request, problem_id):
     user_submissions = Submission.objects.filter(user = user, problem = problem).order_by('-time')
     if user_submissions:
         last_submission  = user_submissions[0]
-         
+        
     if request.method == 'POST':
         form = SubmissionForm(request.POST, request.FILES)
         #Saving the form if it is valid
@@ -41,12 +50,19 @@ def problem_detail(request, problem_id):
             #Redirect to the results of the submission
             return HttpResponseRedirect(problem.get_absolute_url())
     else:
-        #New form for a submission                             
-        form = SubmissionForm()
+        #New form for a submission                
+        form = SubmissionForm()    
+
+    left_submissions = MAX_SUBMISSIONS - last_submission.attempts()  if last_submission else MAX_SUBMISSIONS
+    submission_limit_reached = left_submissions <= 0
+    
     return render_to_response('main/problem_detail.html', {
         'problem': problem,
         'public_testcases':public_testcases,
         'form': form,
+        'left_submissions':left_submissions,
+        'total_marks': get_total_marks(user),
+        'submission_limit_reached':submission_limit_reached,        
         'media_prefix':MEDIA_URL,
         'last_submission':last_submission,},
         context_instance=RequestContext(request))
@@ -65,8 +81,3 @@ def problem_output(request, problem_id, testcase_id):
         return HttpResponse(testcase.output_file.read(),mimetype="text/out")
     else:
         raise Http404
-    
-def test():
-    import django
-    
-    return None
