@@ -100,9 +100,8 @@ var dateParsePatterns = [
     {   re: /^(\d{1,2})(?:st|nd|rd|th)? (\w+)$/i, 
         handler: function(bits) {
             var d = new Date();
-            d.setDate(1);
-            d.setMonth(parseMonth(bits[2]));
             d.setDate(parseInt(bits[1], 10));
+            d.setMonth(parseMonth(bits[2]));
             return d;
         }
     },
@@ -110,10 +109,9 @@ var dateParsePatterns = [
     {   re: /^(\d{1,2})(?:st|nd|rd|th)? (\w+),? (\d{4})$/i,
         handler: function(bits) {
             var d = new Date();
-            d.setDate(1);
-            d.setYear(bits[3]);
-            d.setMonth(parseMonth(bits[2]));
             d.setDate(parseInt(bits[1], 10));
+            d.setMonth(parseMonth(bits[2]));
+            d.setYear(bits[3]);
             return d;
         }
     },
@@ -121,9 +119,8 @@ var dateParsePatterns = [
     {   re: /^(\w+) (\d{1,2})(?:st|nd|rd|th)?$/i, 
         handler: function(bits) {
             var d = new Date();
-            d.setDate(1);
-            d.setMonth(parseMonth(bits[1]));
             d.setDate(parseInt(bits[2], 10));
+            d.setMonth(parseMonth(bits[1]));
             return d;
         }
     },
@@ -131,10 +128,9 @@ var dateParsePatterns = [
     {   re: /^(\w+) (\d{1,2})(?:st|nd|rd|th)?,? (\d{4})$/i,
         handler: function(bits) {
             var d = new Date();
-            d.setDate(1);
-            d.setYear(bits[3]);
-            d.setMonth(parseMonth(bits[1]));
             d.setDate(parseInt(bits[2], 10));
+            d.setMonth(parseMonth(bits[1]));
+            d.setYear(bits[3]);
             return d;
         }
     },
@@ -162,10 +158,9 @@ var dateParsePatterns = [
     {   re: /(\d{1,2})\/(\d{1,2})\/(\d{4})/,
         handler: function(bits) {
             var d = new Date();
-            d.setDate(1);
             d.setYear(bits[3]);
-            d.setMonth(parseInt(bits[1], 10) - 1); // Because months indexed from 0
             d.setDate(parseInt(bits[2], 10));
+            d.setMonth(parseInt(bits[1], 10) - 1); // Because months indexed from 0
             return d;
         }
     },
@@ -173,7 +168,6 @@ var dateParsePatterns = [
     {   re: /(\d{4})-(\d{1,2})-(\d{1,2})/,
         handler: function(bits) {
             var d = new Date();
-            d.setDate(1);
             d.setYear(parseInt(bits[1]));
             d.setMonth(parseInt(bits[2], 10) - 1);
             d.setDate(parseInt(bits[3], 10));

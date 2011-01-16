@@ -53,7 +53,8 @@ class TestCase(models.Model):
     problem = models.ForeignKey(Problem)
     input_file = models.FileField('Input File', upload_to = 'inputs', storage=fs)
     output_file = models.FileField('Output File', upload_to = 'outputs', storage=fs)
-    time_limit = models.FloatField('Time Limit (Seconds)', default = 1)
+    time_limit_soft = models.FloatField('Soft Time Limit (Seconds)', default = 0.5)
+    time_limit = models.FloatField('Time Limit (Seconds)', default = 2)
     is_public = models.BooleanField('Is Public', default = False)
     marks = models.IntegerField('Marks', default = 10)
     def __unicode__(self):
@@ -143,7 +144,7 @@ class Submission(models.Model):
         time_limit = None
         for case in self.problem.testcase_set.all():            
             time_limit = max(time_limit, case.time_limit) if time_limit else case.time_limit
-            tests.append({'input':case.input_file.read(), 'output':case.output_file.read(), 'time_limit':case.time_limit, 'marks': case.marks})
+            tests.append({'input':case.input_file.read(), 'output':case.output_file.read(), 'time_limit_soft':case.time_limit_soft, 'time_limit':case.time_limit, 'marks': case.marks})
         return [self.problem, self.language, self.program.read(),self.filename,tests, time_limit]
     
 #Form for a submission to be made by the user

@@ -323,5 +323,5 @@ def evaluate(language,sourcepath,testlist,timelimit): # testlist is a list of te
 
 if __name__=='__main__':
   test=[{'input':'input/sort.in','output':'output/sort.out'}]
-  res=evaluate('java','javacodes/sort.java',test,1)
+  res=evaluate('c','ccodes/loop.c',test,1)
   print res

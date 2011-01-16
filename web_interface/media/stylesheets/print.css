@@ -1,0 +1,63 @@
+/** 
+ * Copyright 2008 Breezy New Interactive
+ * =====================================
+ */ 
+
+/* -- Basics -- */
+html, body, div, p, form, fieldset, h1, h2, h3, h4, h5, h6   { margin: 0; padding: 0; }
+
+body		{ font: normal 10pt Arial, Helvetica, sans-serif; background: #fff; color: #000; }
+a			  { color: #153F7B; }
+a:hover	{ text-decoration: underline !important; color: #DB2032 !important;}
+a:hover { color: #DB2032; }
+a img   { border:0; }
+
+h1	{ font-size: 1.8em; margin-bottom: .5em; }
+h2	{ font-size: 1.45em; }
+h3	{ font-size: 1.4em; }
+h4	{ font-size: 1.2em; }
+h5	{ font-size: 1.1em; }
+h6	{ font-size: 1em; }
+
+fieldset { border: 0 !important; }
+
+/* -- Tables and lists -- */
+table     { border-collapse: collapse; width: 100%; }
+table th,
+table td  { border: 1px black solid; padding: 5px; }
+
+ul li { padding-left: 10px; }
+ol li { padding-left: 10px; }
+
+/* -- Basic layout -- */
+#view    { }
+#head    { font-size: 1.1em; position: relative; z-index: 1; display: none; }
+#content { font-size: 1.1em; position: relative; z-index: 1; }
+#foot    { font-size: 1.1em; position: relative; z-index: 1; display: none; }
+
+/* -- Main classes -- */
+.fr		    { float: right !important; }
+.fl		    { float: left !important; }
+.clear    { clear: both !important; }
+.right	  { text-align: right !important; }
+.left		  { text-align: left !important; }
+.center	  { text-align: center !important; }
+.last		  { margin-right: 0 !important; margin-bottom: 0 !important; border-bottom: none !important; }
+.small	  { font-size: .90em; }
+.big      { font-size: 1.5em; }
+.item     { margin-bottom: 1.5em; border-bottom: 1px #d8d8d8 solid; clear: both; }
+.info     { font-size: .95em; margin: 2px 0 6px !important; }
+.col1     { width: 49%; float: left; }
+.col2     { width: 49%; float: right; }
+img.left  { margin-left: 0 !important; }
+img.right { margin-right: 0 !important; }
+
+/* -- NoPrint items -- */
+.hidden,
+#menuBlock { display: none; }
+
+/* -- Content items -- */
+#contentBlock p,
+#contentBlock ul,
+#contentBlock ol,
+#contentBlock table { margin-bottom: 2em; }

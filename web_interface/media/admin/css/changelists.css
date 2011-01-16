@@ -23,7 +23,7 @@
     background: white url(../img/admin/changelist-bg.gif) top right repeat-y !important;
 }
 
-.change-list .filtered .results, .change-list .filtered .paginator, .filtered #toolbar, .filtered div.xfull {
+.change-list .filtered table, .change-list .filtered .paginator, .filtered #toolbar, .filtered div.xfull {
     margin-right: 160px !important;
     width: auto !important;
 }
@@ -62,6 +62,7 @@
 
 #changelist table tbody td {
     border-left: 1px solid #ddd;
+    max-width:450px;
 }
 
 #changelist table tbody td:first-child {

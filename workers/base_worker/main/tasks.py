@@ -28,12 +28,17 @@ def submit(name, language,program,filename, tests, time_limit):
     result['marks'] = 0
     for (i, case) in enumerate(result['status']):
         if case == 'correct':
-            test = tests[i]            
+            test = tests[i]
             time_taken = result['executiontime'][i]
-            result['marks'] += round(test['marks']*((test['time_limit'] - time_taken)/test['time_limit']))            
+            if time_taken > test['time_limit_soft']:                
+                exceed_time = time_taken - test['time_limit_soft']
+                max_exceed_time = test['time_limit'] - test['time_limit_soft']                
+                result['marks'] += round(test['marks']*((max_exceed_time - exceed_time)/max_exceed_time), 2)
+            else:
+                result['marks'] += test['marks']
         else:            
             result['successful'] = False
-        i+=1
+            result['error']=case or 'Runtime Exceeded'
 
     if not result['successful']:
         result['marks'] = 0

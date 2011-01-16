@@ -1,0 +1,37 @@
+remove internal notice board
+
+add fests to main navigation and remove fests from elsewhere
+
+test the mailer
+
+redirect student achievements to Kudos page (IIT Kharagpur website)
+
+// Updates must be changed :
+
+// 1. Yuva - Youth Summit to be held from January 7 - 9.
+
+// 2. Alumni meet to be held from January 7 - 9.
+
+// 3. Sunidhi Chauhan @ SF 2011
+
+// 4. GES 2011 - January 14-15
+
+// put link to iitkgp in the footer
+
+// Tnp Cell - from iit website
+// Alumni Cell - facebook page
+// Step - www.stepiitkgp.in
+// BC Roy Hospital - from dc++
+// Nehru Museum - from iit website
+
+// student activities : 1. Schols ave 2. robotix 3. Ecell 4. wiki page link to student life at iit kharagpur
+
+Enable webmaster for internal notice board & site content
+
+// increase font size of footer text. Remove visitors.
+
+gallery page
+
+make a pic of tsg with signature
+
+// mail template 4452

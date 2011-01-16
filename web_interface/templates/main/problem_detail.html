@@ -25,8 +25,37 @@
 {% endblock %}
 {% block content_heading %}{{ problem.title }}{% endblock %}
 {% block content %}
-<div class="entry">
-	<div class = "problem">{{ problem.question|safe }}</div>
+{% cache 1 sidebar_problem problem %}
+<div id="sidebar">
+    <h3>Your stats:</h3>
+    Total Marks: <b>{{ total_marks }}</b>
+    <br/>
+    <h3>Problem Stats:</h3>
+  	Total Submissions: {{ problem.status.total_submissions }}<br/>
+  	Sucessful Submissions: {{ problem.status.successful_submissions }}<br/>
+  	Sucess Rate: {{ problem.status.success_rate }}%<br/><br/>
+    <table>
+    	<thead>
+    		<tr>
+    			<th>Team</th><th>Lang</th><th>Status</th><th></th>
+    		</tr>
+    	</thead>
+    	<tbody>
+  		{% for submission in problem.status.latest_submissions %}
+    		<tr>
+    			<td>{{ submission.user.get_full_name|title }}</td><td>{{ submission.language|title }}</td><td>{{ submission.status }}</td><td>{{ submission.time|timesince }} ago</td>
+    		</tr>
+    		{% empty %}
+    		<tr>
+            <td>No submissions</td><td></td><td></td><td></td>
+    		</tr>
+    	{% endfor %}
+    	</tbody>
+    </table>    
+</div>
+{% endcache %}
+<div class="entry" style="width:400px;">
+	{{ problem.question|safe }}
 	{% if public_testcases %}
 	<p><strong>Sample input:</strong>
 	{% for case in public_testcases %}	    
@@ -35,7 +64,7 @@
 	{% endfor %}
 	{% endif %}
 	</p>
-	{% if not last_submission.correct %}
+	{% if not False  %}  <!--last_submission.correct-->
         {% if submission_limit_reached %}
         <p>
         You have already reached the limit for max submissions for this problem.
@@ -54,48 +83,25 @@
 		{% if last_submission.celery_task.ready %}
     		{% if last_submission.correct %}
     			<span style = "color:green;">Your submission was correct.</span>
+    			<br/>You were awarded {{ last_submission.result.marks }} mark{{ last_submission.result.marks|pluralize }}  for your submission.
     		{% else %}
-    		    <span style = "color:red;">Your submission was incorrect.</span>    
-    		{% endif %}
-		    <br/>You were awarded {{ last_submission.result.marks }} mark{{ last_submission.result.marks|pluralize }}  for your submission
+    		    <span style = "color:red;">Your last submission was not correct: {{ last_submission.result.error.title }}</span>    
+    		{% endif %}		    
 		{% else %}
-		    <span style = "color:red;">Your old submission is in process. Please Wait</span> <a href ="">Refresh</a>
+		    <span style = "color:red;">Your old submission is in process. Please Wait</span> <a href ="">Refresh</a><br/>
+                    <span sttle = "color:red;">If it has taken more than 5 mins for submission processing, please resubmit</span>
 		{% endif %}
-		( {{ last_submission.attempts }} attempt{{ last_submission.attempts|pluralize }}, {{ left_submissions }} submission{{ left_submissions|pluralize }} left)
+		( {{ last_submission.attempts }} attempt{{ last_submission.attempts|pluralize }})
 		</p>
-<pre class="brush: {{ last_submission.language }}; toolbar: false; gutter: true;" id="program" style="">
-{{ last_submission.program.read }}
-</pre>
     {% endif %}
 </div>
+<pre class="brush: {{ last_submission.language }}; toolbar: false; gutter: true;" id="program">
+{{ last_submission.program.read }}
+</pre>
 <script type="text/javascript">
     SyntaxHighlighter.all();
     toggleVisibility('program');    
 </script>
 {% endblock %}
 {% block sidebar %}
-{% cache 0 sidebar_problem problem %}
-<div id="sidebar">
-    <center><h1>Your stats:</h1></center>
-    Total Marks: <b>{{ total_marks }}</b>
-    <center><h1>Problem Stats:</h1></center>
-  	Total Submissions: {{ problem.status.total_submissions }}<br/>
-  	Sucessful Submissions: {{ problem.status.successful_submissions }}<br/>
-  	Sucess Rate: {{ problem.status.success_rate }}%<br/><br/>
-    <table>
-    	<thead>
-    		<tr>
-    			<th>Team</th><th>Lang</th><th>Status</th>
-    		</tr>
-    	</thead>
-    	<tbody>
-  		{% for submission in problem.status.latest_submissions %}
-    		<tr>
-    			<td>{{ submission.user|title }}</td><td>{{ submission.language|title }}</td><td>{{ submission.status }}</td><td>{{ submission.time|timesince }} ago</td>
-    		</tr>
-    	{% endfor %}
-    	</tbody>
-    </table>    
-</div>
-{% endcache %}
 {% endblock %}

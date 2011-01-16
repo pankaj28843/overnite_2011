@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block head %}
+<style type="text/css">
+</style>
+{% endblock %}
+{% block title %}Login{% endblock %}
+{% block content %}<h2>Login</h2>
+<p>
+	{% if user.is_active %}
+    	<span style="color:red">Absurd request. You are already logged in.</span>
+    {% else %}
+    <p>
+	    For logging in use your Team ID  as username and new team password as submitted  on <a href="http://overnite.ktj.in">http://overnite.ktj.in</a> as password.
+    	Just in case of any problem, please do contact us. <br/>
+    	If you don't have a team password, please register at : <a href="http://overnite.ktj.in">http://overnite.ktj.in</a>    	    	
+    </p>         
+    {% if form.errors %}
+    <p style="color:red">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    
+    <form method="post" action="{% url django.contrib.auth.views.login %}">
+    <table>
+    <tr>
+        <td>Team Id</td>
+        <td>{{ form.username }}</td>
+    </tr>
+    <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+    </tr>
+    </table>
+    
+    <input type="submit" value="login" />
+    <input type="hidden" name="next" {% if request.path == '/login/' %} value="/contest/" {% else %}  value="{{ request.path }}" {% endif %} />
+    </form>
+	{% endif %}
+</p>{% endblock %}

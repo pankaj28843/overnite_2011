@@ -1,0 +1,22 @@
+int gcd(int u, int v){
+    if( u == v)
+        return v;
+    if(u==0)
+        return v;
+	if(v==0)
+		return u;
+    if(u%2 == 0 ){ 
+        if(v%2 == 0) 
+            return (2*gcd(u/2, v/2));
+        else 
+            return  gcd(u/2, v);
+    }
+    else if(v%2 == 0) 
+        return gcd(u, v/2);
+    else{ 
+        if(u>=v)
+            return gcd((u-v)/2, v);
+        else
+            return gcd((v-u)/2, u);
+    }
+}

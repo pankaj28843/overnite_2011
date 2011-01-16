@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="copyright" content="Overnite - Kshitij 2011" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>Overnite - Kshitij 2011</title>
+<link rel="stylesheet" type="text/css" href="/media/css/default.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/media/css/print.css" media="print" />
+{% block head %}{% endblock %}
+</head>
+
+<body>
+
+<div id="view">
+  <!-- #header (main heading + logo with slogan) -->
+  <div id="head">
+    <!-- main headings with search component -->
+    <div id="main">
+      <img style="border:0;" src="http://ktj.in/images/ktjlogo.png" height="60" />
+	  &nbsp;&nbsp;
+	  <img style="margin-top:5px;border:0;" src="http://yuva.ktj.in/images/iitlogo.png" height="45" align="top" />
+	 </div>
+	 <div id="search">
+	    {% if request.user.is_active %}
+        Welcome {{ request.user }}&nbsp;|&nbsp;<a href="/logout/">Logout</a>
+        {% else %}
+        <a href="/login/">Log In</a>
+        {% endif %}
+	 </div>
+
+    <!-- /main headings with search component -->
+    <hr class="hidden" />
+    <!-- main horizontal menu -->
+    <div id="mainMenu">
+      <ul>
+        <li id="index_m"><a href="/">Home<span></span></a></li>
+        <li id="index_m"><a href="/about/">About<span></span></a></li>
+        <li id="index_m"><a href="/contest/">Contest<span></span></a></li>
+        <li id="index_m"><a href="http://www.ktj.in/">Kshitij<span></span></a></li>
+        <li id="index_m"><a href="/help/">Help<span></span></a></li>
+        <li id="index_m"><a href="/overnite-team/">Overnite-Team<span></span></a></li>  
+      </ul>
+    </div>
+    <!-- /main horizontal menu -->
+    <hr class="hidden" />
+
+    <!-- logo with slogan -->
+    <div id="logo">
+    </div>
+    <!-- /logo with slogan -->
+    <hr class="hidden" />
+  </div>
+  <!-- /#header (main heading + logo with slogan) -->
+  
+  <!-- #main content construct -->
+  <div id="content">
+
+    <!-- #left part of web - main content -->
+    <div id="contentBlock">
+      <!-- #first (main) article -->
+      <h1>{% block content_heading %}{% endblock %}</h1>
+	  {% block content %}{% endblock %}	
+      <!-- /#first (main) article -->
+    </div>
+    <!-- /#left part of web - main content -->
+    <hr class="hidden" />
+  </div>
+  <!-- /#main content construct -->
+
+
+  <!-- #footer -->
+  <div id="foot">
+    <p class="fl">&copy; Kshitij 2011. all rights reserved</p>
+    
+    <!-- /#   LINKS AND AUTHOR-SIGNATURE CANNOT BE REMOVED !!! -->
+    <p class="fr"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FKshitij.2011&amp;layout=button_count&amp;show_faces=true&amp;width=100&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>&nbsp;&nbsp;</p>
+  </div>
+
+  <!-- /#footer -->
+</div>
+
+</body>
+</html>
+

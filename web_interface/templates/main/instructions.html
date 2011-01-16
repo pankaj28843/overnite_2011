@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block title %}Instructions{% endblock %}
+{% block content %}<h2>Instructions</h2>
+<br>
+<h4>Before You Start</h4>
+<p>
+Welcome to the practice round of ACM-ICPC Overnite '11 Programming Contest. Before you start the contest, please be
+aware of the following notes:
+</p>
+<p style="margin-top:-20px">
+	<ul style="margin-left:10px">
+		<li>There are seven problems in this contest.</li>
+		<li>Any of your solutions can use any of the languages C, C++ or Java. Use only the compilers gcc, g++, and javac. </li>
+		<li>Only follwing headers should be used:
+			<ul style="margin-left:10px">
+				<li>For C: stdio.h, stdlib.h, string.h, math.h</li>
+				<li>For C++: cstdio, cstdlib, cmath, cstring, vector, iostream, string, sstream, complex.</li>
+				<li>For Java: java.lang.*, java.util.*., </li>
+                                <li>Don't use any 'system' calls.</li>
+			</ul>
+		</li>
+		<li>All solutions must read from standard input and write to standard output. In C this is scanf/printf, in C++ this is cin/cout, and in Java this is System.in/out.</li>
+		<li>The judges will ignore all output sent to standard error. From your workstation you may test your program with an input file by redirecting input from a file:<br>
+		program &lt; file.in 
+<br>or in Java:&nbsp; java Program &lt; file.in </li>
+		<li> Solutions for problems submitted for judging are called runs. Each run will be judged.<br>
+Refresh the Score card block to view the status of the submission.<br></li>
+		<li>This problem set contains sample input and output for each problem. However, you may be assured that the judges will test your submission against several other more complex datasets. Several questions require an efficient rather than naive solution.
+			<ul style="margin-left:10px">
+				<li>If the response is "wrong", your program output was wrong.
+				<li>If the response is "Time-Limit Exceeded", chances are that you need to implement a more efficient algorithm.</li>
+				<li>If the response is "E", your program contains something that is not admissible to run.</li>
+			</ul>
+		</li>
+		<li>Runs for each particular problem will be judged in the order they are received. However, it is possible that runs for different problems may be judged out of order. For example, you may submit a run for B followed by a run for C, but receive the response for C first.</li>
+		<li>All lines of program input and output should end with a newline character (\n, endl, or println()). At the end of total output (including all test cases) there should be a newline.</li>
+		<li>All input sets used by the judges will follow the input format specification found in the problem description. You do not need to test for input that violates the input format specified in the problem.</li>
+		<li>Best wishes for your team. Remember the Olympic ideal: Treasure your experience of participation and your moments of struggle!&nbsp;</li>
+	</ul>
+</p>{% endblock %}

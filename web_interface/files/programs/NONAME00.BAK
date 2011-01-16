@@ -1,0 +1,35 @@
+#include<conio.h>
+#include<iostream.h>
+int fac(int a);
+void main()
+{
+	int x,y,way;
+	cout<<"Enter the no. of 1s and 0s:";
+	cin>>x>>y;
+	if((x+y)%2==0)
+	{
+		way=fac(x+y)/(fac(x)*fac(y));
+		if(x==y)
+			way=way-2;
+		else
+		{
+			way=way-((x+y)/2);
+		}
+	}
+	else
+	{
+		way=fac(x+y)/(fac(x)*fac(y));
+	}
+	cout<<"No. of ways is "<<way;
+	getch();
+}
+int fac(int a)
+{
+	int f=1;
+	for(int i=0;i<a;i++)
+	{
+		f=a*f;
+		a--;
+	}
+	return(f);
+}

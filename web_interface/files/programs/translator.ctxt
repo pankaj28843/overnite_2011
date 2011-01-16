@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=class\ translator
+comment1.params=ms
+comment1.target=void\ main(String)
+comment2.target=ar
+comment3.params=a
+comment3.target=void\ main1(String[])
+comment4.params=s\ rtn
+comment4.target=void\ possiblestrings(String,String)
+comment5.target=c
+comment6.target=ar1
+numComments=7

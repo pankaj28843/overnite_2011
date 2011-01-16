@@ -13,7 +13,7 @@ def execute(command,t0):
     child_pid = os.fork()
     if child_pid == 0:
 	#print "child started"
-	res = os.system(command)
+        res = os.system(command)
 	os.write(w, str(res))
 	#print "bla bla"
 	sys.exit()
@@ -42,7 +42,7 @@ def execute(command,t0):
 
 	  if((time.time() - start) >= t0): #checking if time exceeded t0
    	        #print "Time Exceeded"
-    		new_command = "ps -ef | grep " + '"' + command + '"' + "| awk '{print $2}' > files/temp/pid.txt"
+    		"""new_command = "ps -ef | grep " + '"' + command + '"' + "| awk '{print $2}' > files/temp/pid.txt"
     		#print new_command
    		a = os.system(new_command)
     		f = open('files/temp/pid.txt' , 'r')
@@ -50,7 +50,11 @@ def execute(command,t0):
       			#print line
        			line = line.split('\n')[0]
       			#print line
-      	        os.system("kill -9 "+line);
+      	        os.system("kill -9 "+line)"""
+
+                os.system("killall a.out")
+                os.system("killall java")
+    		
        		os.kill(child_pid, signal.SIGTERM)
        		os.wait() #in that case kill child
        		break
@@ -84,4 +88,3 @@ def execute(command,t0):
 if __name__ == "__main__":
     print execute("python abc.py", 1)
     print "here"
-

@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int modA(int a[], int ai, int z)
+{
+	int carry = 0, i;
+	for(i=ai;i<1001;i++)
+		carry = (carry*10000 + a[i]) % z;
+	return carry;
+}
+
+int gcd(int a, int b)
+{
+	if(b==0)
+		return a;
+	return gcd(b, a%b);
+}
+
+void print_num(int* a, int ai)
+{
+    int i;
+    printf("%d",a[ai]);
+    for(i=ai+1;i<1001;i++) printf("%04d",a[i]);
+	putchar('\n');
+}
+
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	char str[1000];
+	int a[1001];
+	while(t--){
+
+		int ai=1000, x=1, i, A, B;
+		a[1000] = 0;
+
+		scanf("%d",&A);
+		scanf("%s",str);
+
+		for(i=strlen(str)-1; i>=0; i--){
+			a[ai] += ((str[i]-48)*x);
+			x*=10;
+			if(x==10000){
+				a[--ai]=0;
+				x = 1;
+			}
+		}
+		if(a[ai]==0)
+			ai++;
+
+		if(A==0) print_num(a,ai);
+		else if(ai==1000 && a[1000]==0) printf("%d\n",A);
+		else{
+			B = modA(a, ai, A);
+			printf("%d\n",gcd(A,B));
+		}
+	}
+	return 0;
+}

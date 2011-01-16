@@ -1,14 +1,24 @@
 from main.models import *
 from django.contrib import admin
 
+
+def mark_public(modeladmin, request, queryset):
+    queryset.update(is_public=True)
+mark_public.short_description = "Mark selected stories as public"
+
+def mark_not_public(modeladmin, request, queryset):
+    queryset.update(is_public=False)
+mark_not_public.short_description = "Mark selected stories as not public"
+
 class TestCaseInline(admin.TabularInline):
 	model = TestCase
-	extra = 1
+	extra = 5
 class ProblemAdmin(admin.ModelAdmin):
     class Media:
         js = ('js/nicEdit.js','js/admin_wysiwg.js')
-    list_display = ('title','no_of_test_cases', 'total_marks')
+    list_display = ('title','is_public', 'no_of_test_cases', 'total_marks')
     inlines = [TestCaseInline]
+    actions = [mark_public, mark_not_public]
     search_fields = ['title', 'question']
     
 class SubmissionAdmin(admin.ModelAdmin):

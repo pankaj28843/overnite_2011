@@ -22,9 +22,3 @@
 ul.actionlist li {
     list-style-type: none;
 }
-
-ul.actionlist li.changelink {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-}

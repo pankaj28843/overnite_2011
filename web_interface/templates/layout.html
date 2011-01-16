@@ -1,59 +1,87 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    	<meta name="description" content="Overnite " />
-		<meta name="keywords" content="" />
-		{% block head %}{% endblock %}
-		<title>{% block title %}Overnite | Kshitij 2011{% endblock %}</title>
-		<link rel="stylesheet" href="/media/stylesheets/style.css" type="text/css" media="screen"/>
-        <link rel="shortcut icon" href="/media/favicon.ico" />        
-	</head>
-	<body>
-		<div id="wrapper">
-			<div id="header">
-				<div class="logo" >				
-					<h1>Overnite</h1>
-					<h2></h2>
-				</div>         
-   				<div class="extra">
-   					{% if request.user.is_active %}Welcome {{ request.user }}{% else %}<a href="">Log In</a>&nbsp;|&nbsp;<a href="">Register</a>{% endif %} | <a href = "/admin" target = "_blank" >Admin</a>
-   				</div>	
-    			<div style="clear:both;"/>
-			</div>
-			<div id="menu">
-					<ul>
-						<li><a href="/">Home</a></li>
-						<li><a href="/about/">About</a></li>
-						<li><a href="/contest/">Contest</a></li>
-						<li><a href="http://www.ktj.in/" target="_blank">Kshitj</a></li>
-						<li><a href="">Help</a></li>
-                        <li style="float:right; margin-top:-4px; margin-right:-10px;">
-                            <form action="" method='post'>
-		                        <input id="search-term" name="keys" size="20" maxlength="40" type="text">&nbsp;
-		                        <input src="/media/images/button-search-go.gif" id="search-go" class="submit" alt="Go" title="Go" type="image" name='op' value='Search'>
-		                        &nbsp;&nbsp;&nbsp;&nbsp;
-                            </form>
-                        </li>
-					</ul>
-			</div>
-    		<div id="page" style="text-a">
-    			<div id ="content">
-	 				<h1>{% block content_heading %}{% endblock %}</h1>
-					{% block content %}{% endblock %}					
-				</div>
-				{% block sidebar %}
-					{% include 'includes/sidebar.html' %}
-				{% endblock %}
-				<div style="clear:both;"></div>
-			</div>
-			<div id="footer">
-				<p>
-					Copyright 2011. &copy; <a href="http://www.ktj.in" target="_blank">Kshitij 2011</a>. All rights reserved.
-					<br/>Site best viewed in 
-					<a href="http://www.mozilla.com/en-US/firefox/" target="_blank">Mozilla Firefox</a> or <a href="http://www.google.com/chrome" target = "_blank">Google Chrome</a><br/>
-				</p>
-			</div>
-		</div>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="copyright" content="Overnite - Kshitij 2011" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>Overnite - Kshitij 2011</title>
+<link rel="stylesheet" type="text/css" href="/media/stylesheets/default.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/media/stylesheets/print.css" media="print" />
+{% block head %}{% endblock %}
+</head>
+
+<body>
+
+<div id="view">
+  <!-- #header (main heading + logo with slogan) -->
+  <div id="head">
+    <!-- main headings with search component -->
+    <div id="main">
+      <img style="border:0;" src="http://ktj.in/images/ktjlogo.png" height="60" />
+	  &nbsp;&nbsp;
+	  <img style="margin-top:5px;border:0;" src="http://yuva.ktj.in/images/iitlogo.png" height="45" align="top" />
+
+	 <div id="extra">
+	    {% if request.user.is_active %}
+        Welcome {{ request.user }}&nbsp;|&nbsp;<a href="/logout/">Logout</a>
+        {% else %}
+        <a href="/login/">Log In</a>
+        {% endif %}
+	 </div>
+	 	 </div>
+
+    <!-- /main headings with search component -->
+    <hr class="hidden" />
+    <!-- main horizontal menu -->
+    <div id="mainMenu">
+      <ul>
+        <li id="index_m"><a href="/">Home<span></span></a></li>
+        <li id="index_m"><a href="/instructions/">Instructions<span></span></a></li>        
+        <li id="index_m"><a href="/contest/">Contest<span></span></a></li>
+        <li id="index_m"><a href="/credits/">Credits<span></span></a></li>  
+        <li id="index_m"><a href="http://www.ktj.in/" target="_blank">Kshitij<span></span></a></li>  
+      </ul>
+    </div>
+    <!-- /main horizontal menu -->
+    <hr class="hidden" />
+
+    <!-- logo with slogan -->
+    <div id="logo">
+    </div>
+    <!-- /logo with slogan -->
+    <hr class="hidden" />
+  </div>
+  <!-- /#header (main heading + logo with slogan) -->
+  
+  <!-- #main content construct -->
+  <div id="content">
+
+    <!-- #left part of web - main content -->
+    <div id="contentBlock">
+      <!-- #first (main) article -->
+      <h3>{% block content_heading %}{% endblock %}</h3>      
+	  <p style="margin-top:-10px;">{% block content %}{% endblock %}</p>
+      <!-- /#first (main) article -->
+    </div>
+    {% block sidebar %}{% endblock %}
+    <!-- /#left part of web - main content -->
+    <hr class="hidden" />
+  </div>
+  <!-- /#main content construct -->
+
+
+  <!-- #footer -->
+  <div id="foot">
+    <p class="fl">&copy; Kshitij 2011. all rights reserved</p>
+    
+    <!-- /#   LINKS AND AUTHOR-SIGNATURE CANNOT BE REMOVED !!! -->
+    <p class="fr"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FKshitij.2011&amp;layout=button_count&amp;show_faces=true&amp;width=100&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>&nbsp;&nbsp;</p>
+  </div>
+
+  <!-- /#footer -->
+</div>
+
+</body>
 </html>
+

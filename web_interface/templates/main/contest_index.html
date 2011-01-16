@@ -2,22 +2,11 @@
 {% load cache %}
 {% block content_heading %}Problems:{% endblock %}
 {% block content %}
-<div class="entry">
-    <table style="min-width:400px;">
-    {% for p in problems %}
-        <tr><td><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></td><td>{% if p.is_solved %}<span style = "color:green;">(Solved)</span>{% endif %}</td></tr>
-    {% empty %}
-        No problems are available.
-    {% endfor %}
-    </table> 
-</div>
-{% endblock %}
-{% block sidebar %}
-{% cache 10 sidebar_contest_index %}
 <div id="sidebar">
-    <center><h1>Your stats:</h1></center>
+    <h3>Your stats:</h3>
     Total Marks: <b>{{ total_marks }}</b>
-    <center><h1>Recent Activity</h1></center>
+    <br/>
+    <h3>Recent Activity</h3>
     <table>
     	<thead>
     		<tr>
@@ -27,11 +16,26 @@
     	<tbody>
   		{% for submission in submissions %}
     		<tr>
-    			<td>{{ submission.user|title }}</td><td><a href="{{ submission.problem.get_absolute_url }}">{{ submission.problem|truncatewords:2}}</a></td><td>{{ submission.language|title }}</td><td>{{ submission.status }}</td><td>{{ submission.time|timesince }} ago</td>
+    			<td>{{ submission.user.get_full_name|title }}</td><td><a href="{{ submission.problem.get_absolute_url }}">{{ submission.problem|truncatewords:2}}</a></td><td>{{ submission.language|title }}</td><td>{{ submission.status }}</td><td>{{ submission.time|timesince }} ago</td>
+    		</tr>
+    	{% empty %}
+    		<tr>
+            <td>No submissions</td><td></td><td></td><td></td><td></td>
     		</tr>
     	{% endfor %}
     	</tbody>
     </table>    
 </div>
-{% endcache %}
+<div class="entry" style="width:400px;">
+    
+    <table style="min-width:400px">
+    {% for p in problems %}
+        <tr><td><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></td><td>{% if p.is_solved %}<span style = "color:green;">Solved</span>{% endif %}</td></tr>
+    {% empty %}
+        No problems are available.
+    {% endfor %}
+    </table> 
+</div>
+{% endblock %}
+{% block sidebar %}
 {% endblock %}
