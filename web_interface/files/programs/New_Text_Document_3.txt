@@ -1,0 +1,51 @@
+#include<iostream.h>
+#include<conio.h>
+#include<string>
+class person
+{
+char[5];
+int s=3,c=7,k=1
+private:int a[max]x;
+int top;
+public stack()
+{
+top=-1
+}
+void push();
+void pop();
+void display();
+void main();
+}
+
+cout <<"enter the player to selected";
+cin>.k;
+top ++;
+}
+}
+void stack<t>::pop(0
+{
+count<<"stack is empty "<<end l;
+else
+{
+x= a[top]
+top--;
+count<<"delet the player <<x<<endl;
+}
+count <<"the element is stack are"<<endl;
+for(i= top;i=0;i--)
+i=top;
+while(i!=1)
+{
+cout++;
+i--;
+}
+cout<<"the no of players in stack are<<
+}
+void stack<t>
+{
+cout<<"1.menu<<end l;
+cout<<"2.push<<end l;
+cout<<"3.pop<<end l;
+cout<<"4.exit<<end l;
+}
+}

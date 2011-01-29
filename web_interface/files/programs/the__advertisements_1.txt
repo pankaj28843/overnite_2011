@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+    int n,a[16],min=100,compatible,cp1,cp2;
+    unsigned int temp;
+    int i,j;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    scanf("\n%d",&a[i]);
+    for(i=0;i<n;i++)
+    {
+            for(j=i+1;j<n;j++)
+            {
+                    temp=a[i]-a[j];
+                    if(temp<min)
+                    {
+                                min=temp;
+                                cp2=a[j];
+                                }
+                                }
+                                cp1=a[i];
+                                }
+                                printf("%d",cp1+cp2);
+                                
+                                return 0;
+                                }

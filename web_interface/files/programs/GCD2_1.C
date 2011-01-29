@@ -1,31 +1,41 @@
-// DEBANJAN SAHA--663937
-
 #include<stdio.h>
-#include<stdlib.h>
-#include<conio.h>
-void main()
+char b[300];
+int gcd(int,int);
+int main()
 {
-int n,a,b,z,i,f[30];
-clrscr();
-printf("INPUT\n");
-scanf("%d",&n);
-printf("\n");
-for(i=0;i<n;i++)
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int a,i=0;
+        //b=(char *)malloc(sizeof(char)*300);
+        scanf("%d %s",&a,b);
+        int len=strlen(b);
+        int c=1;
+        int pow=len-1;
+        int res=0;
+        if(a==0)
+        printf("%s\n",b);
+        else if(len==1 && *(b+0)=='0')
+        printf("%d\n",a);
+        else{
+        for(i=0;i<len;i++)
+        {
+            res=(res+(c%a)*(*(b+len-1-i)-'0'))%a;
+            c=(c*10)%a;           
+        }
+        printf("%d\n",gcd(a,res%a));
+        } 
+        //free(b);                
+    }  
+      
+      return(0);
+}
+int gcd(int a,int b)
 {
-scanf("%d %d",&a,&b);
-printf("\n");
-while(b>0)
-{
-z=a%b;
-a=b;
-b=z;
+    if(b==0)
+    return(a);
+    else
+    return(gcd(b,a%b));
 }
-f[i]=a;
-}
-printf("\n\nOUTPUT\n");
-for(i=0;i<n;i++)
-{
-printf("%d\n",f[i]);
-}
-getch();
-}
+    

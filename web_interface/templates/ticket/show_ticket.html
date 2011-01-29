@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Your Query{% endblock %}
+{% block content %}
+	<h2>Your Query</h2>
+	<p>
+		<strong>{{ ticket.user.get_full_name }}</strong><span style="font-size:9px;"> ({{ ticket.time|timesince }} ago)</span><br/>
+		<span style="margin-left:px;">{{ ticket|linebreaksbr }}</span>
+		<hr/>
+		{% if not ticket.solved%}<a href="/ticket/mark-solved/{{ ticket.id }}/" style="color:green; font-size:14px;">Mark this as solved</a><br>{% endif %}
+		<a href="/ticket/" style="color:red; font-size:14px;">See your queries</a>
+		<hr>
+	<p>
+	<h2>Replies</h2>	
+	{% for a in answers %}
+	<p>
+		<strong>{{ a.user.get_full_name }}</strong><span style="font-size:9px;"> ({{ a.time|timesince }} ago)</span> says<br/>
+		<span style="margin-left:px;">{{ a.answer|linebreaksbr }}</span>
+		<hr/>
+	</p>
+	{% empty %}
+	<p>
+		No replies yet.
+		<hr/>
+	</p>
+	{% endfor %}
+	<h2>Post a reply</h2>
+	<form action="" method="post">
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Submit" style="margin-left:20px;">			
+	</form>
+{% endblock %}

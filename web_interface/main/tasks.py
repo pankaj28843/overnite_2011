@@ -25,22 +25,27 @@ def submit(name, language,program,filename, tests, time_limit):
     program_file.close()
     result =  evaluate.evaluate(language, get_path(program_file), testlist, time_limit)
     result['successful'] = True
-    result['marks'] = 0
-    for (i, case) in enumerate(result['status']):
-        if case == 'correct':
-            test = tests[i]
-            time_taken = result['executiontime'][i]
-            if time_taken > test['time_limit_soft']:                
-                exceed_time = time_taken - test['time_limit_soft']
-                max_exceed_time = test['time_limit'] - test['time_limit_soft']                
-                result['marks'] += round(test['marks']*((max_exceed_time - exceed_time)/max_exceed_time), 2)
-            else:
-                result['marks'] += test['marks']
-        else:            
-            result['successful'] = False
-            result['error']=case or 'Runtime Exceeded'
-
-    if not result['successful']:
+    result['marks'] = 0    
+    if not result['status']=='errors':
+        for (i, case) in enumerate(result['status']):
+            if case == 'correct':
+                test = tests[i]
+                time_taken = result['executiontime'][i]
+                if time_taken > test['time_limit_soft']:                
+                    exceed_time = time_taken - test['time_limit_soft']
+                    max_exceed_time = test['time_limit'] - test['time_limit_soft']                
+                    result['marks'] += round(test['marks']*((max_exceed_time - exceed_time)/max_exceed_time), 2)
+                else:
+                    result['marks'] += test['marks']
+            else:            
+                result['successful'] = False
+                result['error']=case or 'Runtime Exceeded'
+                break
+    else:
+        result['error'] = 'Compilation Error'
+        result['successful'] = False
+        
+    if not result['successful']:        
         result['marks'] = 0
     return result
 

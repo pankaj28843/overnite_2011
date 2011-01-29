@@ -1,0 +1,40 @@
+#include<iostream.h>
+void main()
+{
+	int i,a[25],b[25],n,j,min,max,temp,k;
+	cin>>n;
+	for(i=0;i<n;i++)
+	cin>>a[i];
+	for(i=0;i<n;i++)
+	{
+		min=a[i];
+		for(j=i+1;j<n;j++)
+		{
+			if(min<a[j])
+			{
+				temp=min;
+				min=a[j];
+				a[j]=temp;
+			}
+			a[i]=min;
+		}
+		a[i]=min;
+	}
+	for(i=0,j=n-1;i<(n/2);i++,j--)
+	{
+		b[i]=a[i]+a[j];
+	}
+	k=n/2;
+	if((n%2)!=0)
+	{
+		b[i]=a[n/2];
+		k=n/2+1;
+	}
+	max=b[0];
+	for(i=0;i<k;i++)
+	{
+		if(max<b[i])
+		max=b[i];
+	}
+	cout<<max<<endl;
+}

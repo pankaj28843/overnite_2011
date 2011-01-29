@@ -1,0 +1,30 @@
+#include<stdio.h>
+
+int main(){
+int n,arr[50],arr2[50];
+int i=0,sum;
+int j=0,temp;
+int max;
+scanf("%d",&n);
+for(;i<n;i++)
+scanf("\n%d",&arr[i]);
+for(i=0;i<n;i++){
+for(j=i+1;j<n;j++){
+if(arr[i]>arr[j]){
+temp=arr[i];
+arr[i]=arr[j];
+arr[j]=temp;
+}
+}
+}
+max=arr[i]+arr[n-1];
+for(i=0;i<n;i++){
+sum=arr[i]+arr[n-(i+1)];
+if(max<sum){
+int i=0;
+max=sum;
+}
+}
+printf("%d",max);
+return 0;
+}

@@ -1,0 +1,48 @@
+
+#include<stdio.h>
+int main()
+{
+     int n;
+     printf("Enter n:\n");
+     scanf("%d\n",&n);
+     int arr[200];
+     int a1[200];
+     int temp = 0;
+     int c = 0;
+    int t=0;
+int max =0,p = 0;
+     for(int i = 0;i<n;i++)
+     {
+          printf("Enter the temper coefficient :\n");
+          scanf("%d",&arr[i]);
+     }
+     for(i=0;i<(n-1);i++)
+      {
+         for(int j = 0;j<(n-i-1);j++)
+             {
+                  if(arr[j] > arr[j+1])
+                     {
+                          t = arr[j+1];
+                          arr[j+1] = arr[j];
+                          arr[j] = t;
+                     }
+             }
+      }
+      for(i = 0;i<n/2;i++)
+      {
+          a1[i] = arr[i] +arr[(n-i)];
+          c++;
+      }
+      for(i = 0;i<=c;i++)  
+    {
+       max = a1[0];
+       p = 0;
+       if(a1[i] >max)
+   {
+       max = a1[i];
+       p = i; 
+   }
+}
+printf("%d\n",max);
+return 0;
+}

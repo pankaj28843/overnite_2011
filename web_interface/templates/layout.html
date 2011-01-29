@@ -25,6 +25,9 @@
 	 <div id="extra">
 	    {% if request.user.is_active %}
         Welcome {{ request.user }}&nbsp;|&nbsp;<a href="/logout/">Logout</a>
+        {% if request.user.is_superuser %}
+        | <a href="/siteadmin/">Admin</a>
+        {% endif %}
         {% else %}
         <a href="/login/">Log In</a>
         {% endif %}
@@ -40,7 +43,8 @@
         <li id="index_m"><a href="/instructions/">Instructions<span></span></a></li>        
         <li id="index_m"><a href="/contest/">Contest<span></span></a></li>
         <li id="index_m"><a href="/credits/">Credits<span></span></a></li>  
-        <li id="index_m"><a href="http://www.ktj.in/" target="_blank">Kshitij<span></span></a></li>  
+        <li id="index_m"><a href="/updates/">Updates<span></span></a></li>  
+        <li id="index_m"><a href="/ticket/">Queries<span></span></a></li>  
       </ul>
     </div>
     <!-- /main horizontal menu -->
@@ -59,8 +63,11 @@
 
     <!-- #left part of web - main content -->
     <div id="contentBlock">
-      <!-- #first (main) article -->
-      <h3>{% block content_heading %}{% endblock %}</h3>      
+      <!-- #first (main) article -->      
+      <hr>
+      <h4 style="text-align:center;font-size:14px;">No more submissions are allowed. Thanks for participating, the results will be updated soon. Post your feedback in the  query in the "Queries" section or contact the overnite team.</h4>
+      <hr>     
+      <h3>{% block content_heading %}{% endblock %}</h3>
 	  <p style="margin-top:-10px;">{% block content %}{% endblock %}</p>
       <!-- /#first (main) article -->
     </div>

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block title %}Your Queries{% endblock %}
+{% block content %}
+	<h2>New Query</h2>
+	<p>
+		<a href="/ticket/new/" style="color:red; font-size:14px;">Ask query</a><br>
+		Before posting your query please check the <a href="/instructions/">instructions</a> and <a href="/updates/">updates</a> page.
+	</p>
+	<h2>Your queries</h2>	
+	{% for t in tickets %}
+	<p>
+		<span style="font-size:9px;"> ({{ t.time|timesince }} ago)</span><br/>
+		<a href="/ticket/{{ t.id }}/">{{ t|linebreaksbr|truncatewords:10 }}</a>
+		<hr/>
+	</p>
+	{% empty %}
+	<p>
+		No queries.
+		<hr/>
+	</p>
+	{% endfor %}
+{% endblock %}

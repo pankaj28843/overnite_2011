@@ -27,7 +27,7 @@ def contest_index(request):
         problem_list.append(problem)
 
     if request.user.is_superuser:
-        submissions = Submission.objects.filter(is_latest=True).order_by('-time')[:10] 
+        submissions = Submission.objects.filter(is_latest=True).order_by('-time')[:500] 
     else:
         submissions = Submission.objects.filter(is_latest=True, problem__is_public=True).order_by('-time')[:10] 
     return render_to_response('main/contest_index.html', {

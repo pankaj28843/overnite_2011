@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block title %}Submit Query{% endblock %}
+{% block content %}<h2>Submit Query</h2>
+<p>
+	<form action="" method="post">
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Submit" style="margin-left:10px;">		
+	</form>
+</p>
+{% endblock %}

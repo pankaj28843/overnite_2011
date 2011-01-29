@@ -1,0 +1,37 @@
+The integer function that is the heart of this section is the modulo function.  However,
+before getting to it, let us look at some very simple functions.  The first (and most important) of
+these is the floor function.  We denote this function by lxm although it can be denoted by floor(x)
+It is also widely known as the greatest integer function and is found in some computer languages
+as the integer function (sometimes denoted INT(x)).  The floor of x is  the greatest integer lessthan-or-equal-to x.  For example, l4m = 4, l2.5m = 2, l-2m = -2, l-2.5m = -3, lBm = 3, l-Bm = -4.
+(Beware of using the truncate function found in computer languages as it will only be correct
+for positive numbers).  Note that the floor function is an integer function in that it always returns
+an integer, although it is applied to all real numbers.  
+The ceiling function complements the floor function.  It is denoted by jxk or ceiling(x).
+The ceiling of x is the least integer greater-than-or-equal-to x.  For example, j4k = 4, j2.5k = 3,
+j-2k = -2, j-2.5k = -2, jBk = 4, j-Bk = -3.
+1
+A rather exotic example of the ceiling function is as follows: the following function for
+integers greater than 4 evaluates to 1 if n is a prime otherwise it is 0. 
+ f(n) =   .  This is based upon Wilson’s Theorem which is given in a
+(n-1)!/n- (n-1)!/n
+
+later section
+
+#include<iostream.h>
+#include<conio.h>
+vodi main()
+{
+
+Input n, m
+j = 0 
+For i 7 1 to n
+print i
+move to the next column to the right
+j 7 j + 1 (mod m)
+if j = 0 go to first column of next line
+If y # 0 then return "error"
+If x $ 0 then return x mod y
+If x + 0 then z 7 (!x) mod y, return y ! z
+}
+getch();
+}

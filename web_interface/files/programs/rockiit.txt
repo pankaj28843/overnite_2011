@@ -1,0 +1,46 @@
+#include<iostream.h>
+#include<conio.h>
+ int main()
+ {
+	  
+	  int a,n ;
+	 long long int temp , max;
+	  cout<<" Enter the number \n ";
+	  cin>>n;
+	 long long int *ptr,*sum;
+	  ptr = new long long int(n);
+	  
+	  sum = new long long int((n+1)/2);
+	  cout<<"Enter temper index\n " ;
+	  for( a= 0; a<n;a++)
+	  cin>>*(ptr+a) ;
+	  for(int i =0; i<n;i++)
+	  { 
+	    for(int j=0; j<n-i-1;j++)
+	   {
+		   if(*(ptr+j)>*(ptr+j+1))
+	    { temp= *(ptr+j);
+	      *(ptr+j)=*(ptr+j+1);
+	      *(ptr+j+1) = temp;
+	      }
+	      }
+	      }
+	      
+	    for(int i=0; i<((n+1)/2);i++)
+	     { 
+	     
+	      
+	     *(sum+i) = *(ptr+i) + *(ptr+n-i-1); } 
+	      
+	      if((n%2)!=0)
+	      *(sum+((n+1)/2) -1)= *(ptr+((n+1)/2) -1);
+	      
+	      max = *(sum);
+	      for(a=1;a<((n+1)/2);a++)
+	      { if(*(sum+a) >= max)
+	        max= *(sum+a);}
+	      
+	    
+	   cout<<"\n"<<max;
+	  return 0;
+	  }

@@ -4,7 +4,8 @@
 </style>
 {% endblock %}
 {% block title %}Login{% endblock %}
-{% block content %}<h2>Login</h2>
+{% block content_heading %}Login{% endblock %}
+{% block content %}
 <p>
 	{% if user.is_active %}
     	<span style="color:red">Absurd request. You are already logged in.</span>

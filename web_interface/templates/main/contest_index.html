@@ -6,18 +6,20 @@
     <h3>Your stats:</h3>
     Total Marks: <b>{{ total_marks }}</b>
     <br/>
-    <h3>Recent Activity</h3>
+    <h3>Correct Submissions</h3>
     <table>
     	<thead>
     		<tr>
-    			<th>Team</th><th>Problem</th><th>Lang</th><th>Status</th><th></th>
+    			<th>Team</th><th>Problem</th><th>Lang</th><th></th>
     		</tr>
     	</thead>
     	<tbody>
   		{% for submission in submissions %}
+  		{% if submission.correct %}
     		<tr>
-    			<td>{{ submission.user.get_full_name|title }}</td><td><a href="{{ submission.problem.get_absolute_url }}">{{ submission.problem|truncatewords:2}}</a></td><td>{{ submission.language|title }}</td><td>{{ submission.status }}</td><td>{{ submission.time|timesince }} ago</td>
+    			<td>{{ submission.user.get_full_name|title }}</td><td><a href="{{ submission.problem.get_absolute_url }}">{{ submission.problem|truncatewords:2}}</a></td><td>{{ submission.language|title }}</td><td>{{ submission.time|timesince }} ago</td>
     		</tr>
+    	{% endif %}
     	{% empty %}
     		<tr>
             <td>No submissions</td><td></td><td></td><td></td><td></td>

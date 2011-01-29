@@ -126,7 +126,9 @@ def checkcodeCPP(sourcepath):
   tempfile.write("#include<string>\n")
   tempfile.write("#include<sstream>\n")
   tempfile.write("#include<complex>\n")
-
+  tempfile.write("#include<algorithm>\n")
+  tempfile.write("using namespace std;\n")
+  
   #reading the C file line by line
   s=cppfile.readline()
   while(s!=''):
@@ -156,6 +158,7 @@ def checkcodeJava(sourcepath):
   #writing all required headers at the top
   tempfile.write("import java.lang.*;\n")
   tempfile.write("import java.util.*;\n")
+  tempfile.write("import java.io.*;\n")
 
   #reading the C file line by line
   s=javafile.readline()
@@ -286,7 +289,7 @@ def evaluateJava(sourcepath,testlist,timelimit,result):
      for i in testlist:
        inputpath=i['input']
        outputpath=i['output']
-       runcmd='java -classpath files/temp '+classname+' < ' + inputpath + ' > files/temp/output.out'
+       runcmd='java -mx64m -classpath files/temp '+classname+' < ' + inputpath + ' > files/temp/output.out'
        response=timechecker.execute(runcmd,timelimit)
        
        # response={'status':'ok/runtime exceeded/runtime error','executiontime':'time/-1'}

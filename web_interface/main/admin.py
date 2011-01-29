@@ -23,13 +23,13 @@ class ProblemAdmin(admin.ModelAdmin):
     
 class SubmissionAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None,			   {'fields': ['problem']}),
-		(None,			   {'fields': ['program']}),
-		(None,			   {'fields': ['language']}),
+		(None,			   {'fields': ['problem', 'user', 'program', 'language', 'task_status', 'code']}),
+                
 	]
+	readonly_fields = ('correct', 'code', 'task_status')
 	list_display = ('problem','user', 'time','program','task_status','result','id','is_latest')
-	list_filter = ['time']
-	search_fields = ['problem']
+	list_filter = ['time', 'user']
+	search_fields = ['problem__title']
 	date_hierarchy = 'time'
 	def save_model(self, request, obj, form, change): 
 		instance = form.save(commit=False)

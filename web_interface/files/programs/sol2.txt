@@ -1,0 +1,22 @@
+#include<conio.h>
+#include<stdio.h>
+void main()
+{int max=0,n,j,m[100],i,k;
+long ti[100];
+clrscr();
+scanf("%d",&n);
+for(i=1;i<=n;i++)
+{
+scanf("%ld",&ti[i]);}
+j=1;
+for(i=1;i<=n;i+=2)
+{m[j]=ti[i]+ti[i+1];
+j++;
+}
+for(k=1;k<j;k++)
+{ if(m[k]>max)
+  max=m[k];
+}
+printf("\n%d",max);
+getche();
+}

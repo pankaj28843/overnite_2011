@@ -3,7 +3,7 @@ djcelery.setup_loader()
 ROOT_PATH = os.path.dirname(__file__)
 # Django settings for the project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -66,6 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -90,11 +91,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'djcelery',
     'main',
+    'ticket',
+    'django.contrib.flatpages'
 )
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576
 MAX_UPLOAD_SIZE = 1048576
 MAX_SUBMISSIONS = 100
-
-MAX_UPLOAD_SIZE = 1048576
-MAX_SUBMISSIONS = 10

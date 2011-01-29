@@ -1,0 +1,12 @@
+
+#include <stdio.h>
+#include<conio.h>
+void main()
+{
+struct player
+int n=1;
+clrscr();
+printf("enter the no fo players");
+scanf("%d %d %d",&n)
+getch();
+{

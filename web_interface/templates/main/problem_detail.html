@@ -32,8 +32,9 @@
     <br/>
     <h3>Problem Stats:</h3>
   	Total Submissions: {{ problem.status.total_submissions }}<br/>
+  	{% if request.user.is_superuser %}
   	Sucessful Submissions: {{ problem.status.successful_submissions }}<br/>
-  	Sucess Rate: {{ problem.status.success_rate }}%<br/><br/>
+  	Sucess Rate: {{ problem.status.success_rate }}%<br/>{% endif %}<br/>
     <table>
     	<thead>
     		<tr>
@@ -64,10 +65,10 @@
 	{% endfor %}
 	{% endif %}
 	</p>
-	{% if not False  %}  <!--last_submission.correct-->
-        {% if submission_limit_reached %}
+	{% if True  %}  <!--last_submission.correct  submission_limit_reached-->
+        {% if True  %}
         <p>
-        You have already reached the limit for max submissions for this problem.
+        Submissions are now closed.
         </p>
 	    {% else %}
 	    <form action="#" method="post" class = "form" enctype="multipart/form-data">
@@ -89,9 +90,9 @@
     		{% endif %}		    
 		{% else %}
 		    <span style = "color:red;">Your old submission is in process. Please Wait</span> <a href ="">Refresh</a><br/>
-                    <span sttle = "color:red;">If it has taken more than 5 mins for submission processing, please resubmit</span>
+            <span sttle = "color:red;">If it has taken more than 5 mins for submission processing, please resubmit</span>
 		{% endif %}
-		( {{ last_submission.attempts }} attempt{{ last_submission.attempts|pluralize }})
+		<!--( {{ last_submission.attempts }} attempt{{ last_submission.attempts|pluralize }})-->
 		</p>
     {% endif %}
 </div>

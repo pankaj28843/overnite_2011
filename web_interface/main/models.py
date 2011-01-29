@@ -110,6 +110,10 @@ class Submission(models.Model):
             return 'Correct' if self.correct() else 'Wrong'
         else:
             return 'Processing'
+
+    def code(self):
+        return "%s" %(self.program.read().replace('\n', '<br/>'))    
+        
     def save(self,user=None,problem=None,*args, **kwargs):
         if not self.celery_task:
             if user:
@@ -119,7 +123,7 @@ class Submission(models.Model):
             self.filename = str(self.program)
             self.celery_task = SubmitTask.apply_async(args = self.task_detail())
             self.update_old_submissions()
-        super(Submission, self).save(*args, **kwargs)
+            super(Submission, self).save(*args, **kwargs)
     
     def set_latest(self, submissions):
         latest_submission = submissions.latest()
@@ -165,8 +169,8 @@ class SubmissionForm(forms.ModelForm):
         filename = forms.CharField(widget=HiddenInput())
         
 
-def get_total_marks(user):
-    submissions = Submission.objects.filter(user = user, is_latest=True)
+def get_total_marks(user, queryset=None):
+    submissions = queryset or Submission.objects.filter(user = user, is_latest=True)
     marks = 0    
     for submission in submissions:        
         try:
@@ -175,3 +179,9 @@ def get_total_marks(user):
             pass
 
     return marks
+    
+    
+def get_rank(user):
+    users = User.objects.all()
+    total_submissions = Submissions.objects.filter(is_latest=True)    
+    #for user in user

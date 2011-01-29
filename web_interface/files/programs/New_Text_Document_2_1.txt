@@ -1,0 +1,47 @@
+#include<stdio.h>
+int main()
+{
+   int a[50],i=0,sum,n,j=0,temp,max,t;
+       printf("Enter the no. of player not  more  than 10:");
+       scanf("%d",&n);
+       
+for(i=0;i<n;i++)
+{
+scanf("\n%d",&a[i]);
+}
+for(i=0;i<n;i++)
+{
+printf("%d\n",a[i]);
+}
+for(i=0;i<n;i++)
+{
+for(j=i+1;j<n;j++)
+{
+if(a[i]>a[j])
+{
+t=a[i];
+a[i]=a[j];
+a[j]=t;
+}
+}
+}
+for(i=0;i<n;i++)
+{
+printf("%d\n",a[i]);
+}
+       for(i=0;i<n;i++)
+       {
+       max = a[i]+a[n-1];
+       for(i=0;i<n;i++)
+   {
+               sum=a[i]+a[n-(i+1)];
+               if(max<sum)
+       {
+       int i=0;
+                       max=sum;
+               }
+       }
+       printf("%d ",max);
+       
+}
+}
